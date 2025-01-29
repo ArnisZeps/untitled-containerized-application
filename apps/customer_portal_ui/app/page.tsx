@@ -2,20 +2,21 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="grid p-16 grid-cols-1 gap-16">
-      <div className="flex flex-col items-center md:justify-between md:flex-row">
-        <div className="mb-8">
+      {/* <div className="flex flex-col items-center md:justify-between md:flex-row"> */}
+      <div className="max-w-screen-xl place-items-center mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+        <div>
           <div className="text-2xl font-medium md:text-3xl">We have put together a swing improvement solution to help you break 80</div>
           <div>
             <div className="text-2xl font-normal">Pack Includes:</div>
             <hr className="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700"/>
-            <div className="font-medium border-l-4 border-blue-500 pl-4 text-lg max-w-sm">
+            <div className="font-medium border-l-4 border-blue-500 pl-4 text-lg">
               <p>Swing Analyzer - HackMotion Core</p>
               <p>Drills by coach Tyler Ferrel</p>
               <p>Game Improvement plan by HackMotion</p>
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="grid  grid-cols-1 gap-4 md:grid-cols-2">
           <div className="col-span-1 md:col-span-2">
             <Image className="w-[328px] md:w-[565px] h-auto" src="/improvement_graph.png" alt="improvement_graph" width={565} height={565} />
           </div>
