@@ -1,9 +1,11 @@
 import Image from "next/image";
+import VideoPlayer from "./components/VideoPlayer";
+
 export default function Home() {
   return (
-    <div className="grid p-16 grid-cols-1 gap-16">
+    <div className="grid p-16 grid-cols-1 gap-16 md:max-w-screen-xl mx-auto">
       {/* <div className="flex flex-col items-center md:justify-between md:flex-row"> */}
-      <div className="max-w-xs gap-8 w-full place-items-center mx-auto grid grid-cols-1 md:grid-cols-2 md:max-w-screen-xl">
+      <div className="max-w-xs mx-auto gap-8 w-full place-items-center grid grid-cols-1 md:grid-cols-2 md:max-w-screen-xl">
         <div className="grid grid-cols-1 gap-12">
           <div className="text-2xl font-medium md:text-3xl">We have put together a swing improvement solution to help you break 80</div>
           <div>
@@ -35,7 +37,9 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-row justify-evenly">
-        <div>coachin</div>
+          <div className="flex justify-center items-center max-w-xl">
+            <VideoPlayer src={"/videos/impact_drill.mp4"}/>
+          </div>
       </div>
     </div>
   );
