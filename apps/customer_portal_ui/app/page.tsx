@@ -2,8 +2,8 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="grid p-16 grid-cols-1 gap-16">
-      <div className="flex items-center justify-evenly flex-col md:justify-evenly md:flex-row">
-        <div>
+      <div className="flex flex-col items-center md:justify-evenly md:flex-row">
+        <div className="mb-8">
           <div>We have put together a swing improvement solution to help you break 80</div>
           <div>
             <span>pack includes:</span>
