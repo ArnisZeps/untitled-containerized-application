@@ -3,13 +3,13 @@ export default function Home() {
   return (
     <div className="grid p-16 grid-cols-1 gap-16">
       {/* <div className="flex flex-col items-center md:justify-between md:flex-row"> */}
-      <div className="max-w-screen-xl place-items-center mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-        <div>
+      <div className="max-w-xs gap-8 w-full place-items-center mx-auto grid grid-cols-1 md:grid-cols-2 md:max-w-screen-xl">
+        <div className="grid grid-cols-1 gap-12">
           <div className="text-2xl font-medium md:text-3xl">We have put together a swing improvement solution to help you break 80</div>
           <div>
             <div className="text-2xl font-normal">Pack Includes:</div>
-            <hr className="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700"/>
-            <div className="font-medium border-l-4 border-blue-500 pl-4 text-lg">
+            <hr className="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
+            <div className="font-medium border-l-4 border-blue-500 pl-4 text-lg space-y-2">
               <p>Swing Analyzer - HackMotion Core</p>
               <p>Drills by coach Tyler Ferrel</p>
               <p>Game Improvement plan by HackMotion</p>
