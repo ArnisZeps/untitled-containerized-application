@@ -1,1 +1,27 @@
 
+services:
+  customer_portal_ui:
+    container_name: customer_portal_ui
+    build:
+      context: ./apps/customer_portal_ui
+      dockerfile: dockerfile
+
+    # environment:
+    #   ENV_VARIABLE: ${ENV_VARIABLE}
+    #   NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+
+    env_file:
+      - .env
+    volumes:
+      - ./apps/customer_portal_ui/src:/app/src
+      - ./apps/customer_portal_ui/public:/app/public
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - my_network
+
+
+networks:
+  my_network:
+    driver: bridge
