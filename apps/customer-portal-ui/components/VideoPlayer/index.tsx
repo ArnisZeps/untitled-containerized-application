@@ -26,17 +26,6 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
             >
               <Accordion key={index} title={informativeTimestamp.title} description={informativeTimestamp.description} />
             </div>
-
-            // <div
-            //   key={index}
-            //   className="flex justify-between"
-            //   data-timestamp={informativeTimestamp.timestamp}
-            //   data-title={informativeTimestamp.title}
-            //   data-description={informativeTimestamp.description}
-            // >
-            //   <p id={`${index}-title`}>{informativeTimestamp.title}</p>
-            //   <p id={`${index}-description`}>{informativeTimestamp.description}</p>
-            // </div>
           ))}
         </div>
       )}

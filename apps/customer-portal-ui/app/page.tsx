@@ -2,6 +2,12 @@ import Image from "next/image";
 import VideoPlayer from "../components/VideoPlayer";
 
 export default function Home() {
+  const timestampInfo = [
+    { timestamp: 5, title: "Static top drill", description: "Get a feel for the optimal wrist position at Top of your swing" },
+    { timestamp: 14, title: "Dynamic top drill", description: "Dynamically tain your wrist position at Top" },
+    { timestamp: 24, title: "Top full swing challenge", description: "Train your maximum power swing" },
+  ];
+
   return (
     <div className="grid p-16 grid-cols-1 gap-16 md:max-w-screen-xl mx-auto">
       {/* <div className="flex flex-col items-center md:justify-between md:flex-row"> */}
@@ -38,13 +44,7 @@ export default function Home() {
       </div>
       <div className="flex flex-row justify-evenly">
           <div className="flex justify-center items-center">
-            <VideoPlayer src={"/videos/impact_drill.mp4"} informativeTimestamps={
-              [
-                { timestamp: 1, title: "Start", description: "a" },
-                { timestamp: 10, title: "Impact", description: "b" },
-                { timestamp: 20, title: "End", description: "c" },
-              ]
-            }/>
+            <VideoPlayer src={"/videos/impact_drill.mp4"} informativeTimestamps={timestampInfo}/>
           </div>
       </div>
     </div>
