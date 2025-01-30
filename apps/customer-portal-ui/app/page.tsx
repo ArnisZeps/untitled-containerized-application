@@ -37,7 +37,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-row justify-evenly">
-          <div className="flex justify-center items-center max-w-xl">
+          <div className="flex justify-center items-center">
             <VideoPlayer src={"/videos/impact_drill.mp4"}/>
           </div>
       </div>
