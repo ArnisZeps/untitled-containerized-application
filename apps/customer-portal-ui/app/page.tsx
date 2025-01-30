@@ -38,7 +38,13 @@ export default function Home() {
       </div>
       <div className="flex flex-row justify-evenly">
           <div className="flex justify-center items-center">
-            <VideoPlayer src={"/videos/impact_drill.mp4"}/>
+            <VideoPlayer src={"/videos/impact_drill.mp4"} informativeTimestamps={
+              [
+                { timestamp: 1, title: "Start", description: "a" },
+                { timestamp: 10, title: "Impact", description: "b" },
+                { timestamp: 20, title: "End", description: "c" },
+              ]
+            }/>
           </div>
       </div>
     </div>

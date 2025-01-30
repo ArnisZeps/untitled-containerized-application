@@ -1,29 +1,45 @@
-interface IVideoPlayerProps {
-  src: string;
-}
+import Accordion from "@/components/Accordion";
+import IVideoPlayerProps from "@/interfaces/IVideoPlayerProps";
 
-const VideoPlayer = ({ src }: IVideoPlayerProps) => {
+const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
   return (
     <div className="grid grid-cols-10 gap-4">
       <div className="col-span-6">
         <video className="w-full relative cursor-pointer">
           <source src={src} />
-          <script type="module" src="/scripts/videoPlayer.js" defer />
+          <script type="module" src="/scripts/videoPlayer.js" data-timestamp={"informativeTimestamps"} defer />
         </video>
       </div>
       <div className="col-span-1 mx-auto">
         <div id="progress-bar" className="relative h-full bg-white w-6 rounded-md">
-          <div id="progress-indicator" className="origin-top  h-full bg-indigo-800 w-full rounded-md"></div>
+          <div id="progress-indicator" className="origin-top scale-y-0 h-full bg-indigo-800 w-full rounded-md"></div>
         </div>
       </div>
-      <div className="col-span-3">
-          <p>Swing Analyzer - HackMotion Core</p>
-          <p>Drills by coach Tyler Ferrel</p>
-          <p>Game Improvement plan by HackMotion</p>
-      </div>
-      {/* <div id="progress-bar" className=" h-1 p-3 rotate-90 w-full bg-black cursor-pointer">
-          <div id="progress-indicator" className="h-full w-0 bg-indigo-800 transition-all"></div>
-        </div> */}
+      {informativeTimestamps && (
+        <div id="info" className="col-span-3">
+          {informativeTimestamps.map((informativeTimestamp, index) => (
+            <div
+              key={index}
+              data-timestamp={informativeTimestamp.timestamp}
+              data-title={informativeTimestamp.title}
+              data-description={informativeTimestamp.description}
+            >
+              <Accordion key={index} title={informativeTimestamp.title} description={informativeTimestamp.description} />
+            </div>
+
+            // <div
+            //   key={index}
+            //   className="flex justify-between"
+            //   data-timestamp={informativeTimestamp.timestamp}
+            //   data-title={informativeTimestamp.title}
+            //   data-description={informativeTimestamp.description}
+            // >
+            //   <p id={`${index}-title`}>{informativeTimestamp.title}</p>
+            //   <p id={`${index}-description`}>{informativeTimestamp.description}</p>
+            // </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
