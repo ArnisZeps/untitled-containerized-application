@@ -1,9 +1,9 @@
 
 services:
-  customer_portal_ui:
-    container_name: customer_portal_ui
+  customer-portal-ui:
+    container_name: customer-portal-ui
     build:
-      context: ./apps/customer_portal_ui
+      context: ./apps/customer-portal-ui
       dockerfile: dockerfile
 
     # environment:
@@ -13,8 +13,8 @@ services:
     env_file:
       - .env
     volumes:
-      - ./apps/customer_portal_ui/src:/app/src
-      - ./apps/customer_portal_ui/public:/app/public
+      - ./apps/customer-portal-ui/src:/app/src
+      - ./apps/customer-portal-ui/public:/app/public
     restart: always
     ports:
       - 3000:3000

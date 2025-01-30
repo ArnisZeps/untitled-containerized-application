@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, IBM_Plex_Sans } from "next/font/google";
-import "./globals.css";
-import Header from "@/app/components/header";
+import "@/styles/globals.css";
+import Header from "@/components/Header"
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],

@@ -1,23 +1,28 @@
 "use strict";
 
-const playNpauseBtn = document.querySelector("#play");
+const playButton = document.querySelector("#play");
 const video = document.querySelector("video");
 const progressIndicator = document.querySelector("#progress-indicator");
 // let animationFrameId;
 
-function playNpauseFn() {
+const handlePlayButtonText = () => {
+  playButton.textContent = "";
+  playButton.textContent = video.paused ? "play" : "stop";
+}
+
+const handlePlay = () => {
   if (video.paused) video.play();
   else video.pause();
 }
 
-function updateProgress() {
+const handleProgressUpdate = () => {
   const progressPercentage = (video.currentTime / video.duration) * 100;
   progressIndicator.style.width = `${progressPercentage}%`;
-  console.log("progressIndicator.style.width", progressIndicator.style.width);
-  console.log("progressPercentage", progressPercentage);
-
-  // animationFrameId = requestAnimationFrame(updateProgress);
 }
-video.addEventListener("click", playNpauseFn);
-playNpauseBtn.addEventListener("click", playNpauseFn);
-video.addEventListener("timeupdate", updateProgress);
+
+video.addEventListener("click", handlePlay);
+playButton.addEventListener("click", handlePlay);
+video.addEventListener("timeupdate", handleProgressUpdate);
+
+video.addEventListener("play", handlePlayButtonText);
+video.addEventListener("pause", handlePlayButtonText);
