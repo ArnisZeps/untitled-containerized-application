@@ -8,11 +8,13 @@ const getTimestampInfo = () => {
 
   const timestamps = Array.from(timestampElements).map((el) => {
     const detailsElement = el.querySelector("details");
-
+    const timestamp = parseFloat(el.getAttribute("data-timestamp") || "0")
     const onclick = () => {
-      video.currentTime = parseFloat(el.getAttribute("data-timestamp") || "0");
-      console.log(video.currentTime);
+      if (video.currentTime !== timestamp) {
+        video.currentTime = timestamp;
+      }
     };
+
     detailsElement.addEventListener("click", onclick);
 
     return {
@@ -32,6 +34,7 @@ const handlePlay = () => {
 
 const handleProgressUpdate = () => {
   if (timestampArray !== null) {
+    let closest = timestampArray[0]
     for (const element of timestampArray) {
       if (video.currentTime < element.timestamp) break;
       closest = element;
