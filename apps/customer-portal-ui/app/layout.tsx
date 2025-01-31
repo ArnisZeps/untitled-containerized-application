@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, IBM_Plex_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import Header from "@/components/Header"
-import { WebVitals } from "@/components/WebVitals";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -36,7 +35,6 @@ export default function RootLayout({
         className={`${ibmPlexSans} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header />
-        <WebVitals />
         {children}
       </body>
     </html>

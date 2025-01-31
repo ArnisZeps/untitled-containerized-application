@@ -1,9 +1,12 @@
 import Image from "next/image";
 import VideoPlayer from "../components/VideoPlayer";
 import ISearchParams from "@/interfaces/ISearchParams";
+import WebVitals from "@/components/WebVitals";
+import { headers } from "next/headers";
 
 export default async function Home({ searchParams }: ISearchParams) {
- 
+  const ipAddr = (await headers()).get("x-forwarded-for") || "unknown";
+
   const result = (await searchParams).result
 
   const timestampInfo = [
@@ -60,6 +63,7 @@ export default async function Home({ searchParams }: ISearchParams) {
           </div>
         </div>
       </div>
+      <WebVitals ipAddr={ipAddr} />
     </div>
   );
 }
