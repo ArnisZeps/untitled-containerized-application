@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post("/analytics/page-view", async (req, res) => {
   try {
+    console.log("req.body", req.body)
     res.status(200).send({
       message: "added",
     });

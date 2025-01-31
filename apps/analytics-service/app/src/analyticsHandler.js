@@ -1,0 +1,3 @@
+const analyticsHandler = ({ eventType, data }) => {
+    
+};

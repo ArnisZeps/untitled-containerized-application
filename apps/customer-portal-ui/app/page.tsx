@@ -1,12 +1,12 @@
 import Image from "next/image";
 import VideoPlayer from "../components/VideoPlayer";
 import ISearchParams from "@/interfaces/ISearchParams";
-import WebVitals from "@/components/WebVitals";
-import { headers } from "next/headers";
+import { headers, cookies } from "next/headers";
+import { collectBaseAnalyticsData } from "@/lib/analytics";
 
 export default async function Home({ searchParams }: ISearchParams) {
-  const ipAddr = (await headers()).get("x-forwarded-for") || "unknown";
 
+  await collectBaseAnalyticsData({ cookies: await cookies(), headers: await headers()})
   const result = (await searchParams).result
 
   const timestampInfo = [
@@ -63,7 +63,7 @@ export default async function Home({ searchParams }: ISearchParams) {
           </div>
         </div>
       </div>
-      <WebVitals ipAddr={ipAddr} />
+      {/* <WebVitals ipAddr={ipAddr} /> */}
     </div>
   );
 }
