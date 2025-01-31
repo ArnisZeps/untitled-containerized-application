@@ -9,14 +9,16 @@ export default function Home() {
   ];
 
   return (
-    <div className="grid p-16 grid-cols-1 gap-16 md:max-w-screen-xl mx-auto">
+    <div className="grid p-16 grid-cols-1 gap-48 md:max-w-screen-xl mx-auto">
       {/* <div className="flex flex-col items-center md:justify-between md:flex-row"> */}
       <div className="max-w-xs mx-auto gap-8 w-full place-items-center grid grid-cols-1 md:grid-cols-2 md:max-w-screen-xl">
         <div className="grid grid-cols-1 gap-12">
-          <div className="text-2xl font-medium md:text-3xl">We have put together a swing improvement solution to help you break 80</div>
+          <div className="text-2xl font-medium md:text-3xl">
+            We have put together a swing improvement solution to help you <p>break 80</p>{" "}
+          </div>
           <div>
             <div className="text-2xl font-normal">Pack Includes:</div>
-            <hr className="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
+            <hr className="h-px my-4 bg-gray-300 border-0" />
             <div className="font-medium border-l-4 border-blue-500 pl-4 text-lg space-y-2">
               <p>Swing Analyzer - HackMotion Core</p>
               <p>Drills by coach Tyler Ferrel</p>
@@ -42,10 +44,18 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex flex-row justify-evenly">
-          <div className="flex justify-center items-center">
-            <VideoPlayer src={"/videos/impact_drill.mp4"} informativeTimestamps={timestampInfo}/>
+      <div>
+        <div>
+          <div className="text-font-normal mb-6 text-3xl font-medium text-blue-500 md:text-4xl md:mb-14">
+            The best solution for you: Impact Training Program
           </div>
+          <hr className="h-px bg-gray-300 border-0" />
+        </div>
+        <div className="flex flex-row justify-evenly mt-10">
+          <div className="flex justify-center items-center">
+            <VideoPlayer src={"/videos/impact_drill.mp4"} informativeTimestamps={timestampInfo} />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
       </div>
 
       {informativeTimestamps && (
-        <div id="info" className="w-full md:w-1/4 flex flex-col">
+        <div id="info" className="w-full md:w-1/3 flex flex-col">
           {informativeTimestamps.map((informativeTimestamp, index) => (
             <div
               key={index}
@@ -27,6 +27,7 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
               data-description={informativeTimestamp.description}
             >
               <Accordion key={index} title={informativeTimestamp.title} description={informativeTimestamp.description} />
+              <hr className="h-px bg-gray-300 border-0 dark:bg-gray-700" />
             </div>
           ))}
         </div>
