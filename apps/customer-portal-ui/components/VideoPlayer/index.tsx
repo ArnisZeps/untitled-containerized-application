@@ -3,20 +3,22 @@ import IVideoPlayerProps from "@/interfaces/IVideoPlayerProps";
 
 const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
   return (
-    <div className="grid grid-cols-10 gap-4">
-      <div className="col-span-6">
+    <div className="flex flex-col md:flex-row md:gap-4">
+      <div className="w-full md:w-3/5">
         <video className="w-full relative cursor-pointer">
           <source src={src} />
           <script type="module" src="/scripts/videoPlayer.js" data-timestamp={"informativeTimestamps"} defer />
         </video>
       </div>
-      <div className="col-span-1 mx-auto">
-        <div id="progress-bar" className="relative h-full bg-white w-6 rounded-md">
-          <div id="progress-indicator" className="origin-top scale-y-0 h-full bg-indigo-800 w-full rounded-md"></div>
+
+      <div className="flex flex-row md:flex-row md:items-center md:space-x-4">
+        <div id="progress-bar" className="relative h-2 w-full md:w-6 md:h-full bg-white rounded-md">
+          <div id="progress-indicator" className="origin-left scale-x-0 md:origin-top md:scale-y-0 h-full w-full bg-indigo-800 rounded-md" />
         </div>
       </div>
+
       {informativeTimestamps && (
-        <div id="info" className="col-span-3">
+        <div id="info" className="w-full md:w-1/4 flex flex-col">
           {informativeTimestamps.map((informativeTimestamp, index) => (
             <div
               key={index}
