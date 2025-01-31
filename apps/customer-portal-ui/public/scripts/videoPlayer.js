@@ -34,6 +34,7 @@ const getTimestampInfo = () => {
 };
 
 const handleProgressUpdate = () => {
+  console.log("resized")
   if (timestampArray !== null) {
     let closest = timestampArray[0];
     for (const element of timestampArray) {
@@ -66,5 +67,7 @@ const timestampArray = getTimestampInfo();
 const video = document.querySelector("video");
 const progressIndicator = document.querySelector("#progress-indicator");
 
+
+window.addEventListener("resize", handleProgressUpdate); 
 video.addEventListener("click", handlePlay);
 video.addEventListener("timeupdate", handleProgressUpdate);

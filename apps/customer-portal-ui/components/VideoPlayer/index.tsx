@@ -3,7 +3,7 @@ import IVideoPlayerProps from "@/interfaces/IVideoPlayerProps";
 
 const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
   return (
-    <div className="flex flex-col md:flex-row md:gap-4">
+    <div className="flex flex-col gap-8 md:flex-row md:gap-4">
       <div className="w-full md:w-3/5">
         <video className="w-full relative cursor-pointer">
           <source src={src} />
