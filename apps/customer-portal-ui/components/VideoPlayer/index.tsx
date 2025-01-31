@@ -27,7 +27,7 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
               data-description={informativeTimestamp.description}
             >
               <Accordion key={index} title={informativeTimestamp.title} description={informativeTimestamp.description} />
-              <hr className="h-px bg-gray-300 border-0 dark:bg-gray-700" />
+              <hr className="h-px bg-gray-300 border-0 dark:bg-gray-700 mt-2 mb-3" />
             </div>
           ))}
         </div>

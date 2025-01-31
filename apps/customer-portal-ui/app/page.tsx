@@ -1,7 +1,11 @@
 import Image from "next/image";
 import VideoPlayer from "../components/VideoPlayer";
+import ISearchParams from "@/interfaces/ISearchParams";
 
-export default function Home() {
+export default function Home({ searchParams }: ISearchParams) {
+ 
+  const dynamicString = searchParams.break;
+
   const timestampInfo = [
     { timestamp: 5, title: "Static top drill", description: "Get a feel for the optimal wrist position at Top of your swing" },
     { timestamp: 14, title: "Dynamic top drill", description: "Dynamically tain your wrist position at Top" },
@@ -14,7 +18,7 @@ export default function Home() {
       <div className="max-w-xs mx-auto gap-8 w-full place-items-center grid grid-cols-1 md:grid-cols-2 md:max-w-screen-xl">
         <div className="grid grid-cols-1 gap-12">
           <div className="text-2xl font-medium md:text-3xl">
-            We have put together a swing improvement solution to help you <p>break 80</p>{" "}
+            We have put together a swing improvement solution to help you <p className="text-blue-500">{dynamicString}</p>{" "}
           </div>
           <div>
             <div className="text-2xl font-normal">Pack Includes:</div>
@@ -47,7 +51,7 @@ export default function Home() {
       <div>
         <div>
           <div className="text-font-normal mb-6 text-3xl font-medium text-blue-500 md:text-4xl md:mb-14">
-            The best solution for you: Impact Training Program
+            <h2>The best solution for you: Impact Training Program</h2>
           </div>
           <hr className="h-px bg-gray-300 border-0" />
         </div>
