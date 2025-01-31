@@ -2,9 +2,9 @@ import Image from "next/image";
 import VideoPlayer from "../components/VideoPlayer";
 import ISearchParams from "@/interfaces/ISearchParams";
 
-export default function Home({ searchParams }: ISearchParams) {
+export default async function Home({ searchParams }: ISearchParams) {
  
-  const dynamicString = searchParams.break;
+  const result = (await searchParams).result
 
   const timestampInfo = [
     { timestamp: 5, title: "Static top drill", description: "Get a feel for the optimal wrist position at Top of your swing" },
@@ -14,11 +14,10 @@ export default function Home({ searchParams }: ISearchParams) {
 
   return (
     <div className="grid p-16 grid-cols-1 gap-48 md:max-w-screen-xl mx-auto">
-      {/* <div className="flex flex-col items-center md:justify-between md:flex-row"> */}
       <div className="max-w-xs mx-auto gap-8 w-full place-items-center grid grid-cols-1 md:grid-cols-2 md:max-w-screen-xl">
         <div className="grid grid-cols-1 gap-12">
           <div className="text-2xl font-medium md:text-3xl">
-            We have put together a swing improvement solution to help you <p className="text-blue-500">{dynamicString}</p>{" "}
+            We have put together a swing improvement solution to help you <p className="text-blue-500">{result}</p>{" "}
           </div>
           <div>
             <div className="text-2xl font-normal">Pack Includes:</div>

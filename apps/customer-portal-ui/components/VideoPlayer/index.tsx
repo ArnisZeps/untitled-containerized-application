@@ -41,7 +41,8 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
     const handleProgressUpdate = () => {
       const progress = video.currentTime / video.duration;
       if (informativeTimestamps && informativeTimestamps.length > 0) {
-        let closestIndex = 0;
+        let closestIndex = -1;
+        
         for (let i = 0; i < informativeTimestamps.length; i++) {
           if (video.currentTime < informativeTimestamps[i].timestamp) break;
           closestIndex = i;
@@ -50,6 +51,7 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
         detailsRefs.current.forEach((details, index) => {
           if (details) details.open = index === closestIndex;
         });
+
         const isVertical = progressBar.clientHeight > progressBar.clientWidth;
         if (isVertical) {
           progressBar.style.transform = `scaleY(${progress})`;
