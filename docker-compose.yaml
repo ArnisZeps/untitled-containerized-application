@@ -11,8 +11,6 @@ services:
       NEXT_PUBLIC_ENV: "dev"
       ANALYTICS_CONTAINER_NAME: "http://analytics-service:4000"
 
-    env_file:
-      - .env
     volumes:
       - ./apps/customer-portal-ui/src:/app/src
       - ./apps/customer-portal-ui/public:/app/public

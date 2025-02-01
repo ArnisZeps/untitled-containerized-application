@@ -15,6 +15,7 @@ export default async function Home({ searchParams }: ISearchParams) {
   });
 
   const result = (await searchParams).result || "Break par";
+  
   const timestampInfo = [
     { timestamp: 5, title: "Static top drill", description: "Get a feel for the optimal wrist position at Top of your swing" },
     { timestamp: 14, title: "Dynamic top drill", description: "Dynamically tain your wrist position at Top" },
