@@ -6,9 +6,8 @@ services:
       context: ./apps/customer-portal-ui
       dockerfile: dockerfile
 
-    # environment:
-    #   ENV_VARIABLE: ${ENV_VARIABLE}
-    #   NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+    environment:
+      NEXT_PUBLIC_ANALYTICS_SERVICE_API: "http://analytics-service:4000"
 
     env_file:
       - .env
@@ -19,9 +18,14 @@ services:
     ports:
       - 3000:3000
     networks:
-      - my_network
-
+      - app-network
+  analytics-service:
+    build: ./apps/analytics-service
+    ports:
+      - "4000:4000"
+    networks:
+      - app-network
 
 networks:
-  my_network:
+  app-network:
     driver: bridge

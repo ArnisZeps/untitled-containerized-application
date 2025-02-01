@@ -1,4 +1,4 @@
-export enum analyticsEventTypes {
-    PAGE_VIEW = "pageview",
-    FULL_VIDEO_VIEW = "fullvideoview"
+export enum ELogGroups {
+    PAGE_VIEWS = "page-views",
+    FULL_VIDEO_VIEWS = "full-video-views"
 }

@@ -1,5 +1,5 @@
 import IBaseAnalyticsData from "@/interfaces/IBaseAnalyticsData"
-import { analyticsEventTypes } from "./constants";
+import { ELogGroups } from "./constants";
 
 const analyticsServiceApi = process.env.NEXT_PUBLIC_ANALYTICS_SERVICE_API || "";
 
@@ -7,9 +7,9 @@ export const collectBaseAnalyticsData = async ({ cookies, headers }: IBaseAnalyt
     const ipAddr = headers.get("x-forwarded-for") || "unknown";
     const deviceInfo = headers.get("user-agent") || "unknown";
     const url = headers.get("x-client-url") || "unknown";
-    const clientId = cookies.get("clientId");
+    const clientId = cookies.get("clientId")?.value;
     const body = JSON.stringify({
-        eventType: analyticsEventTypes.PAGE_VIEW,
+        logGroup: ELogGroups.PAGE_VIEWS,
         timestamp: new Date().toISOString(),
         data: {
             ipAddr,
@@ -17,8 +17,7 @@ export const collectBaseAnalyticsData = async ({ cookies, headers }: IBaseAnalyt
             clientId,
             url
         }
-
     })
-    console.log(body)
-    await fetch(`${analyticsServiceApi}/analytics/page-view`, { body, method: "POST", keepalive: true, headers: { "Content-Type": "application/json" } });
+    console.log("API REQ", `${analyticsServiceApi}/analytics/logger-service`)
+    await fetch(`${analyticsServiceApi}/analytics/logger-service`, { body, method: "POST", keepalive: true, headers: { "Content-Type": "application/json" } });
 }
