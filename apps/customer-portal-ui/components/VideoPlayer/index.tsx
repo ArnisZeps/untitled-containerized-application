@@ -3,11 +3,8 @@
 import Accordion from "@/components/Accordion";
 import IVideoPlayerProps from "@/interfaces/IVideoPlayerProps";
 import { useEffect, useRef } from "react";
-import { getCookie } from "cookies-next/client";
-import { ELogGroups } from "@/lib/constants";
-
-const env = process.env.NEXT_PUBLIC_ANALYTICS_SERVICE_API;
-const analyticsServiceApi = env == "prod" ? process.env.NEXT_PUBLIC_ANALYTICS_SERVICE_API : "http://localhost:4000";
+import { EAnalyticsSource, ELogGroups } from "@/lib/constants";
+import { sendAnalytics } from "@/lib/analytics";
 
 const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -67,26 +64,7 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
     video.addEventListener("timeupdate", handleProgressUpdate);
 
     const sendAnalyticsData = async () => {
-      const body = JSON.stringify({
-        logGroup: ELogGroups.FULL_VIDEO_VIEWS,
-        timestamp: new Date().toISOString(),
-        data: {
-          clientId: getCookie("clientId"),
-          url: window.location.href,
-        },
-      });
-      try {
-        await fetch(`${analyticsServiceApi}/analytics/logger-service`, {
-          body,
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "User-Agent": navigator.userAgent,
-          },
-        });
-      } catch (e) {
-        console.log(e);
-      }
+      await sendAnalytics({ source: EAnalyticsSource.CLIENT, logGroup: ELogGroups.FULL_VIDEO_VIEWS })
     };
 
     video.addEventListener("ended", sendAnalyticsData);

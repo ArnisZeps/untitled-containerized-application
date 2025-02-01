@@ -1,14 +1,20 @@
 import Image from "next/image";
 import VideoPlayer from "../components/VideoPlayer";
+import StartNowButton from "./components/StartButton";
 import ISearchParams from "@/interfaces/ISearchParams";
 import { headers, cookies } from "next/headers";
-import { collectBaseAnalyticsData } from "@/lib/analytics";
+import { sendAnalytics } from "@/lib/analytics";
+import { EAnalyticsSource, ELogGroups } from "@/lib/constants";
 
 export default async function Home({ searchParams }: ISearchParams) {
 
-  await collectBaseAnalyticsData({ cookies: await cookies(), headers: await headers()});
-  const result = (await searchParams).result
+  await sendAnalytics({
+    source: EAnalyticsSource.SERVER,
+    logGroup: ELogGroups.PAGE_VIEWS,
+    serverSource: { cookies: await cookies(), headers: await headers() },
+  });
 
+  const result = (await searchParams).result || "Break par";
   const timestampInfo = [
     { timestamp: 5, title: "Static top drill", description: "Get a feel for the optimal wrist position at Top of your swing" },
     { timestamp: 14, title: "Dynamic top drill", description: "Dynamically tain your wrist position at Top" },
@@ -16,8 +22,8 @@ export default async function Home({ searchParams }: ISearchParams) {
   ];
 
   return (
-    <div className="grid p-16 grid-cols-1 gap-48 md:max-w-screen-xl mx-auto">
-      <div className="max-w-xs mx-auto gap-8 w-full place-items-center grid grid-cols-1 md:grid-cols-2 md:max-w-screen-xl">
+    <div className="grid p-16 grid-cols-1 gap-14 md:gap-48 md:max-w-screen-xl mx-auto">
+      <div className="max-w-sm mx-auto gap-8 w-full place-items-center grid grid-cols-1 md:grid-cols-2 md:max-w-screen-xl">
         <div className="grid grid-cols-1 gap-12">
           <div className="text-2xl font-medium md:text-3xl">
             We have put together a swing improvement solution to help you <p className="text-blue-500">{result}</p>{" "}
@@ -30,6 +36,9 @@ export default async function Home({ searchParams }: ISearchParams) {
               <p>Drills by coach Tyler Ferrel</p>
               <p>Game Improvement plan by HackMotion</p>
             </div>
+          </div>
+          <div>
+            <StartNowButton />
           </div>
         </div>
         <div className="grid  grid-cols-1 gap-4 md:grid-cols-2">
@@ -63,7 +72,6 @@ export default async function Home({ searchParams }: ISearchParams) {
           </div>
         </div>
       </div>
-      {/* <WebVitals ipAddr={ipAddr} /> */}
     </div>
   );
 }
