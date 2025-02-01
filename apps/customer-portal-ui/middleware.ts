@@ -3,6 +3,7 @@ import { cookies } from 'next/headers'
 import { v4 as uuidv4 } from "uuid";
 
 export async function middleware(req: NextRequest) {
+    console.log(req.headers)
     const response = NextResponse.next();
     response.headers.set(
         "x-client-url",

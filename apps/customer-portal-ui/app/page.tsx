@@ -6,7 +6,7 @@ import { collectBaseAnalyticsData } from "@/lib/analytics";
 
 export default async function Home({ searchParams }: ISearchParams) {
 
-  await collectBaseAnalyticsData({ cookies: await cookies(), headers: await headers()})
+  await collectBaseAnalyticsData({ cookies: await cookies(), headers: await headers()});
   const result = (await searchParams).result
 
   const timestampInfo = [

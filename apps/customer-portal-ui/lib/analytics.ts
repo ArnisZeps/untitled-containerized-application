@@ -18,6 +18,5 @@ export const collectBaseAnalyticsData = async ({ cookies, headers }: IBaseAnalyt
             url
         }
     })
-    console.log("API REQ", `${analyticsServiceApi}/analytics/logger-service`)
     await fetch(`${analyticsServiceApi}/analytics/logger-service`, { body, method: "POST", keepalive: true, headers: { "Content-Type": "application/json" } });
-}
+};

@@ -3,6 +3,9 @@
 import Accordion from "@/components/Accordion";
 import IVideoPlayerProps from "@/interfaces/IVideoPlayerProps";
 import { useEffect, useRef } from "react";
+import { getCookie } from "cookies-next/client";
+import { ELogGroups } from "@/lib/constants";
+const analyticsServiceApi = process.env.NEXT_PUBLIC_ANALYTICS_SERVICE_API || "";
 
 const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -35,14 +38,13 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
         video.pause();
       }
     };
-
     video.addEventListener("click", handlePlay);
 
     const handleProgressUpdate = () => {
       const progress = video.currentTime / video.duration;
       if (informativeTimestamps && informativeTimestamps.length > 0) {
         let closestIndex = -1;
-        
+
         for (let i = 0; i < informativeTimestamps.length; i++) {
           if (video.currentTime < informativeTimestamps[i].timestamp) break;
           closestIndex = i;
@@ -60,8 +62,30 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
         }
       }
     };
-
     video.addEventListener("timeupdate", handleProgressUpdate);
+
+    const sendAnalyticsData = async () => {
+      const body = JSON.stringify({
+        logGroup: ELogGroups.FULL_VIDEO_VIEWS,
+        timestamp: new Date().toISOString(),
+        data: {
+          clientId: getCookie("clientId"),
+          url: window.location.href,
+        },
+      });
+
+      await fetch(`${analyticsServiceApi}/analytics/logger-service`, {
+        body,
+        method: "POST",
+        keepalive: true,
+        headers: {
+          "Content-Type": "application/json",
+          "User-Agent": navigator.userAgent,
+        },
+      });
+    };
+    
+    video.addEventListener("ended", sendAnalyticsData);
   }, [informativeTimestamps, videoRef, detailsRefs]);
 
   return (
