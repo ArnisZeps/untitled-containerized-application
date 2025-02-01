@@ -57,8 +57,10 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
 
         const isVertical = progressContainer.clientHeight > progressContainer.clientWidth;
         if (isVertical) {
+          progressBar.style.width = `50%`;
           progressBar.style.height = `${progress}%`;
         } else {
+          progressBar.style.height = `40%`;
           progressBar.style.width = `${progress}%`;
         }
       }
@@ -73,9 +75,9 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
   }, [informativeTimestamps, videoRef, detailsRefs]);
 
   return (
-    <div className="flex flex-col gap-8 md:flex-row md:gap-4">
+    <div className="max-w-sm flex flex-col gap-8 md:flex-row md:gap-4 md:max-w-full">
       <div className="w-full md:w-3/5">
-        <video ref={videoRef} className="w-full relative cursor-pointer">
+        <video ref={videoRef} className="w-full relative cursor-pointer md:max-w-full">
           <source src={src} />
         </video>
       </div>
