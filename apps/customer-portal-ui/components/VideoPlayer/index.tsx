@@ -9,14 +9,16 @@ import { sendAnalytics } from "@/lib/analytics";
 const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
+  const progressContainerRef = useRef<HTMLDivElement | null>(null);
   const detailsRefs = useRef<(HTMLDetailsElement | null)[]>([]);
 
   useEffect(() => {
     const video = videoRef.current;
     const progressBar = progressBarRef.current;
+    const progressContainer = progressContainerRef.current;
     const details = detailsRefs.current;
 
-    if (!video || !progressBar || !details) return;
+    if (!video || !progressBar || !details || !progressContainer) return;
 
     informativeTimestamps?.forEach((informativeTimestamp, index) => {
       const { timestamp } = informativeTimestamp;
@@ -40,7 +42,7 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
     video.addEventListener("click", handlePlay);
 
     const handleProgressUpdate = () => {
-      const progress = video.currentTime / video.duration;
+      const progress = (video.currentTime / video.duration) * 100;
       if (informativeTimestamps && informativeTimestamps.length > 0) {
         let closestIndex = -1;
 
@@ -53,18 +55,18 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
           if (details) details.open = index === closestIndex;
         });
 
-        const isVertical = progressBar.clientHeight > progressBar.clientWidth;
+        const isVertical = progressContainer.clientHeight > progressContainer.clientWidth;
         if (isVertical) {
-          progressBar.style.transform = `scaleY(${progress})`;
+          progressBar.style.height = `${progress}%`;
         } else {
-          progressBar.style.transform = `scaleX(${progress})`;
+          progressBar.style.width = `${progress}%`;
         }
       }
     };
     video.addEventListener("timeupdate", handleProgressUpdate);
 
     const sendAnalyticsData = async () => {
-      await sendAnalytics({ source: EAnalyticsSource.CLIENT, logGroup: ELogGroups.FULL_VIDEO_VIEWS })
+      await sendAnalytics({ source: EAnalyticsSource.CLIENT, logGroup: ELogGroups.FULL_VIDEO_VIEWS });
     };
 
     video.addEventListener("ended", sendAnalyticsData);
@@ -78,9 +80,17 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
         </video>
       </div>
 
-      <div className="flex flex-row md:flex-row md:items-center md:space-x-4">
-        <div id="progress-bar" className="relative h-2 w-full md:w-6 md:h-full bg-white rounded-md">
-          <div ref={progressBarRef} className="origin-left scale-x-0 md:origin-top md:scale-y-0 h-full w-full bg-indigo-800 rounded-md" />
+      <div className="">
+        <div
+          ref={progressContainerRef}
+          className="bg-white rounded-md flex items-center h-4 
+                      md:items-stretch md:justify-center md:h-full md:w-6 "
+        >
+          <div
+            ref={progressBarRef}
+            className="bg-indigo-800 rounded-md relative w-0 h-[40%] left-1 max-w-[98%]
+                        md:left-0 md:top-1 md:w-[50%] md:h-0 md:max-h-[97%]"
+          />
         </div>
       </div>
 
