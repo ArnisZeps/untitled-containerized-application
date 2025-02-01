@@ -7,16 +7,15 @@ const router = express.Router();
 router.post("/analytics/logger-service", async (req, res) => {
   try {
     const { logGroup, timestamp, data } = req.body;
-    console.log("DATA", data)
     logger({
       logGroup,
       timestamp,
-      data:{
-        ipAddr: req.socket.remoteAddress, 
+      data: {
+        ipAddr: req.socket.remoteAddress,
         deviceInfo: req.headers["user-agent"],
-        ...data // overwrites the ipaddr and deviceInfo
-      }
-    })
+        ...data,
+      },
+    });
     res.status(200).send({
       message: "added",
     });
