@@ -5,7 +5,9 @@ import IVideoPlayerProps from "@/interfaces/IVideoPlayerProps";
 import { useEffect, useRef } from "react";
 import { getCookie } from "cookies-next/client";
 import { ELogGroups } from "@/lib/constants";
-const analyticsServiceApi = process.env.NEXT_PUBLIC_ANALYTICS_SERVICE_API || "";
+
+const env = process.env.NEXT_PUBLIC_ANALYTICS_SERVICE_API;
+const analyticsServiceApi = env == "prod" ? process.env.NEXT_PUBLIC_ANALYTICS_SERVICE_API : "http://localhost:4000";
 
 const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -73,18 +75,20 @@ const VideoPlayer = ({ src, informativeTimestamps }: IVideoPlayerProps) => {
           url: window.location.href,
         },
       });
-
-      await fetch(`${analyticsServiceApi}/analytics/logger-service`, {
-        body,
-        method: "POST",
-        keepalive: true,
-        headers: {
-          "Content-Type": "application/json",
-          "User-Agent": navigator.userAgent,
-        },
-      });
+      try {
+        await fetch(`${analyticsServiceApi}/analytics/logger-service`, {
+          body,
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "User-Agent": navigator.userAgent,
+          },
+        });
+      } catch (e) {
+        console.log(e);
+      }
     };
-    
+
     video.addEventListener("ended", sendAnalyticsData);
   }, [informativeTimestamps, videoRef, detailsRefs]);
 

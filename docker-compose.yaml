@@ -8,6 +8,7 @@ services:
 
     environment:
       NEXT_PUBLIC_ANALYTICS_SERVICE_API: "http://analytics-service:4000"
+      NEXT_PUBLIC_ENV: "dev"
 
     env_file:
       - .env
