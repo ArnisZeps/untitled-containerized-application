@@ -35,7 +35,6 @@ export const sendServerAnalytics = async ({ cookies, headers, logGroup }: IServe
             url
         }
     })
-    console.log(analyticsContainerName)
     await fetch(`${analyticsContainerName}/analytics/logger-service`, { body, method: "POST", keepalive: true, headers: { "Content-Type": "application/json" } });
 };
 
