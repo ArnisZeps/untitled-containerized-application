@@ -11,6 +11,9 @@ A monorepo for the Customer Portal UI and Analytics Service.
 ## Analytics Service
 The Analytics Service provides logging functionality and supports multiple log groups. A log group is passed as a parameter. The directory structure for storing logs follows this pattern: `logs/{log-group}/yyyy/mm/dd/logs_hh.json`. Data is being stored in the JSON format. Such approach lets us build analytics on top for creating overviews over perticular time.
 
+### Checking the logs
+It is possible to check the logs on the host machine under /logs directory.
+
 ### Environment Variables
 - `PORT`: The exposed port for network requests.
 

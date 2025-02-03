@@ -1,3 +1,4 @@
+version: '3'
 
 services:
   customer-portal-ui:
@@ -5,12 +6,10 @@ services:
     build:
       context: ./apps/customer-portal-ui
       dockerfile: dockerfile
-
     environment:
       NEXT_PUBLIC_ANALYTICS_SERVICE_API: "http://localhost:4000"
       NEXT_PUBLIC_ENV: "dev"
       ANALYTICS_CONTAINER_NAME: "http://analytics-service:4000"
-
     volumes:
       - ./apps/customer-portal-ui/src:/app/src
       - ./apps/customer-portal-ui/public:/app/public
@@ -19,15 +18,21 @@ services:
       - 3000:3000
     networks:
       - app-network
+
   analytics-service:
     build: ./apps/analytics-service
     ports:
       - "4000:4000"
     environment:
       port: 4000
+    volumes:
+      - ./logs:/usr/src/app/logs
     networks:
       - app-network
 
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  analytics_logs:
